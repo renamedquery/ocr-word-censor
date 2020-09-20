@@ -1,1 +1,4 @@
 argparse
+pytesseract
+opencv-contrib-python-headless
+output.png
