@@ -25,4 +25,5 @@ Example (censors all "idiot"s in the screenshot with green):
 `python3 ./censor.py -i ./SCREENSHOT_1234567890.png -o output.png -w "idiot" -c "#00ff00"`
 
 ![Before censoring](example-before.png)
+
 ![After censoring](example-after.png)
