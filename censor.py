@@ -16,7 +16,6 @@ if (not os.path.exists(arguments.input_file)):
     print('Input file does not exist.')
     exit(1)
 
-
 # open the image and increase its contrast
 image = PIL.Image.open(arguments.input_file)
 imageEnhancer = PIL.ImageEnhance.Sharpness(image.convert('RGBA'))
