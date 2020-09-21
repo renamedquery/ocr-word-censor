@@ -24,8 +24,8 @@ image = imageEnhancer.enhance(2) # the optimal value seems to be 2; I have no id
 # create an object that can be used to draw on the image
 imageDraw = PIL.ImageDraw.Draw(image)
 
-# convert the image to word data
-imageData = pytesseract.image_to_data(image, lang = 'eng', output_type = pytesseract.Output.DICT)
+# convert the image to word data (using a black and white version "LA")
+imageData = pytesseract.image_to_data(image.convert('LA').convert('RGBA'), lang = 'eng', output_type = pytesseract.Output.DICT)
 
 # iterate through the words by their integer index and not their value
 for index in range(len(imageData['text'])):
