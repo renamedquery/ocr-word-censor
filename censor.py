@@ -1,4 +1,4 @@
-import argparse, os, pytesseract, PIL, PIL.ImageEnhance, PIL.ImageDraw
+import argparse, os, pytesseract, PIL, PIL.ImageEnhance, PIL.ImageDraw, string
 
 # create an argument parser so that the user can pass command line arguments
 parser = argparse.ArgumentParser(description = 'Censors the words on an image')
@@ -19,7 +19,7 @@ if (not os.path.exists(arguments.input_file)):
 
 # open the image and increase its contrast
 image = PIL.Image.open(arguments.input_file)
-imageEnhancer = PIL.ImageEnhance.Sharpness(image)
+imageEnhancer = PIL.ImageEnhance.Sharpness(image.convert('RGBA'))
 image = imageEnhancer.enhance(2) # the optimal value seems to be 2; I have no idea why, but it works best this way
 
 # create an object that can be used to draw on the image
@@ -34,7 +34,14 @@ for index in range(len(imageData['text'])):
     dimensions = [imageData['width'][index], imageData['height'][index]]
     position = [imageData['left'][index], imageData['top'][index]]
 
-    isMatch = imageData['text'][index].lower() == arguments.word.lower()
+    # get the word and touch it up by replacing 0s with Os and removing periods, commas, and exclamation marks
+    currentWord = imageData['text'][index].lower()
+    currentWord = currentWord.replace('0', 'o')
+    # re.replace cant be used since most of the symbols are regex themselves and would cause a re.error
+    for char in list(string.punctuation):
+        currentWord = currentWord.replace(char, '')
+
+    isMatch = currentWord.lower() == arguments.word.lower()
 
     if isMatch: print('MATCH FOUND AT X:{} Y:{}'.format(position[0], position[1]))
 
