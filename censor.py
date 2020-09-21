@@ -37,11 +37,8 @@ for index in range(len(imageData['text'])):
     # get the word and touch it up by replacing 0s with Os and removing periods, commas, and exclamation marks
     currentWord = imageData['text'][index].lower()
     currentWord = currentWord.replace('0', 'o')
-    # re.replace cant be used since most of the symbols are regex themselves and would cause a re.error
-    for char in list(string.punctuation):
-        currentWord = currentWord.replace(char, '')
 
-    isMatch = currentWord.lower() == arguments.word.lower()
+    isMatch = currentWord.lower() == arguments.word.lower() or arguments.word.lower() in currentWord.lower()
 
     if isMatch: print('MATCH FOUND AT X:{} Y:{}'.format(position[0], position[1]))
 
