@@ -20,6 +20,9 @@ I found that sometimes I would miss names when censoring screenshots, so I figur
 
 `python3 ./censor.py -i [INPUT] -o [OUTPUT] -w [WORD] -c [COLOR]`
 
-Example (censors all "idiot"s in the screenshot):
+Example (censors all "idiot"s in the screenshot with green):
 
-`python3 ./censor.py -i ./SCREENSHOT_1234567890.png -o output.png -w "Idiot" -c "#000000"`
+`python3 ./censor.py -i ./SCREENSHOT_1234567890.png -o output.png -w "idiot" -c "#00ff00"`
+
+![Before censoring](example-before.png)
+![After censoring](example-after.png)
